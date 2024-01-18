@@ -1,6 +1,5 @@
 const button = document.querySelector("button#submit-area");
 const area = document.querySelector("input#area");
-const img = document.querySelector("img");
 
 button.addEventListener("click", () => getWeather(area.value));
 
@@ -9,6 +8,11 @@ area.addEventListener("keyup", (event) => {
     button.click();
   }
 });
+
+const header = document.querySelector("div.weather-card > h2");
+const condition = document.querySelector("div.weather-card > h3");
+const img = document.querySelector("div.weather-card > img");
+const temp = document.querySelector("div.weather-card > p");
 
 function getWeather(area) {
   fetch(
@@ -27,6 +31,13 @@ function getWeather(area) {
         }
         return;
       }
-      img.src = weather.current.condition.icon;
+      updateWeatherCard(weather);
     });
+}
+
+function updateWeatherCard(weather) {
+  header.textContent = weather.location.name + ", " + weather.location.country;
+  condition.textContent = weather.current.condition.text;
+  img.src = weather.current.condition.icon;
+  temp.textContent = weather.current.temp_c + "	°C";
 }
