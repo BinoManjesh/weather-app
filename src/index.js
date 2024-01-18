@@ -1,3 +1,5 @@
+import "./style.css";
+
 const button = document.querySelector("button#submit-area");
 const area = document.querySelector("input#area");
 
