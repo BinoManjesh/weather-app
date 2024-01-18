@@ -23,7 +23,8 @@ area.addEventListener("keyup", (event) => {
 
 function getWeather(area) {
   fetch(
-    `http://api.weatherapi.com/v1/current.json?key=1a72c7b1d82845ed801143613241601&q=${area}`
+    `https://api.weatherapi.com/v1/current.json?key=1a72c7b1d82845ed801143613241601&q=${area}`,
+    { mode: "cors" }
   )
     .then((response) => {
       loading.classList.add("invisible");
