@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --open-app chromium",
-    "push_dist": "git subtree push --prefix dist origin gh-pages"
+    "push_dist": "npm run build && git commit -am\"Run build\" && git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",
