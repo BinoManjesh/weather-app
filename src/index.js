@@ -30,7 +30,6 @@ function getWeather(area) {
       return response.json();
     })
     .then((weather) => {
-      console.log(weather);
       if (weather.error) {
         handleError(weather.error.code);
         return;
