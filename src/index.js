@@ -11,10 +11,9 @@ area.addEventListener("keyup", (event) => {
   }
 });
 
-const header = document.querySelector("div.weather-card > h2");
-const condition = document.querySelector("div.weather-card > h3");
-const img = document.querySelector("div.weather-card > img");
-const temp = document.querySelector("div.weather-card > p");
+const card = document.querySelector("div.weather-card");
+const [header, condition, img, temp] = card.children;
+const error = document.querySelector("div.error");
 
 function getWeather(area) {
   fetch(
@@ -26,20 +25,28 @@ function getWeather(area) {
     .then((weather) => {
       console.log(weather);
       if (weather.error) {
-        if (weather.error.code == 1006) {
-          //No such area
-        } else {
-          //Some other error
-        }
+        handleError(weather.error.code);
         return;
       }
       updateWeatherCard(weather);
     });
 }
 
+function handleError(code) {
+  card.classList.add("invisible");
+  let errorMessage = "Something went wrong :(";
+  if (code == 1006) {
+    errorMessage = "No such area!";
+  }
+  error.textContent = errorMessage;
+  error.classList.remove("invisible");
+}
+
 function updateWeatherCard(weather) {
+  error.classList.add("invisible");
   header.textContent = weather.location.name + ", " + weather.location.country;
   condition.textContent = weather.current.condition.text;
   img.src = weather.current.condition.icon;
   temp.textContent = weather.current.temp_c + "	°C";
+  card.classList.remove("invisible");
 }

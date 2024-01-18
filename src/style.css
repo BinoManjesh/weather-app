@@ -4,6 +4,10 @@
   font-family: "Poppins";
 }
 
+.invisible {
+  display: none !important;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -29,4 +33,8 @@ div.weather-card > h3 {
 
 div.weather-card > p {
   font-size: x-large;
+}
+
+div.error {
+  color: red;
 }
